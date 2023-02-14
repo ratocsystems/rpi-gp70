@@ -31,6 +31,7 @@ def init_GP70():
 # シリアル設定情報変更
 # 各パラメータの詳細についてはpyserialを参照
 # https://pythonhosted.org/pyserial/pyserial_api.html#serial.Serial
+# 注：pyserial3.5(2020/11/23)でSC16IS752では、パリティの[スペース,マーク]およびDSR/DTR制御設定は無効
 def input_param( ser ):
     print( "設定値を入力 enter:変更なし >" )
     i=input(" baudrate(300,1200,2400,4800,9600,14400,19200,38400,57600,115200,230400,460800,921600) = ")
@@ -136,6 +137,7 @@ if __name__ == "__main__":
                     txd = input( "送信データ入力 enter:戻る > " )   # 送信文字列を入力する
                     if( len(txd)==0 ):                              # Enterのみの場合はメニューに戻る。
                         if( key == 2 ):   # '2'ならRS485モードの設定解除
+                            # pyserial3.5(2020/11/23)では、RS485モード設定状態からの解除は無効。
                             s0.rs485_mode = None    # RS485モード解除
                             s1.rs485_mode = None    # RS485モード解除
                         s0.close()        # Port0 クローズ
@@ -170,7 +172,7 @@ if __name__ == "__main__":
          print( "中断しました" )    # 中断
 #    except Exception:               # その他の例外発生時
          print( "エラー" )          # エラー
-    GPIO.output(27, False)          # RPi-GP60の絶縁電源OFF
+    GPIO.output(27, False)          # RPi-GP70の絶縁電源OFF
     GPIO.cleanup()
     sys.exit()
     
