@@ -121,6 +121,11 @@ SC16IS752のI2CドライバはRaspberry-piに標準で用意されています�
 以下の手順で登録することで、2つのシリアルポートがttyとして認識されます。  
 ### SC16IS752のI2Cドライバ登録と確認手順
 1. config.txtをnanoで編集する  
+   **(注意) 2023年10月リリースのRaspberry Pi OS (bookwarm) から
+   config.txtの保存フォルダーが「/boot」から「/boot/firmware」に移動しました。**  
+   これ以降のRaspberry Pi OSを使用する場合は、
+「sudo nano /boot/firmware/config.txt」と入力してください。
+  
     ```
     $ sudo nano /boot/config.txt
     ```
